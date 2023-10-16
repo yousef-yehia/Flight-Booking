@@ -6,6 +6,6 @@ namespace Flights.Dto
         [Required] Guid FlightId,
         [Required][EmailAddress] string PassengerEmail,
         [Required] Guid PassengerId,
-        [Required][Range(1,20)] byte NumberOfSeats);
+        [Required][Range(1,50)] byte NumberOfSeats);
 
 }

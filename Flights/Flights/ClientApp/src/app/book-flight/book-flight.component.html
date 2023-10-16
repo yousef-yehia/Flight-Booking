@@ -90,7 +90,7 @@
           You can not book for less than 1 passenger!
         </div>
         <div *ngIf="number.errors?.['max']">
-          Our planes do not have more than 55 seats.
+          You can't book more than 50 seats.
         </div>
       </div>
       <div *ngIf="notEnoughSeats" class="error-message invalid-feedback d-block">
