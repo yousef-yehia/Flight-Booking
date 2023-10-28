@@ -6,6 +6,7 @@ namespace Flights.Dto
 {
     public record FlightDto
     (
+        // Flight dto
         [Required]string Airline,
         [Required] string Price,
         [Required] TimePlace Departure,
