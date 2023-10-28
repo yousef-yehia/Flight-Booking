@@ -30,7 +30,7 @@ namespace Flights.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [ProducesResponseType(typeof(IEnumerable<FlightRm>), 200)]
-        public IEnumerable<FlightRm> Search([FromQuery]FlightSearchParmsDto prms)
+        public IEnumerable<FlightRm> Search([FromQuery] FlightSearchParmsDto prms)
         {
             IQueryable<Flight> flights = _entities.Flights;
 
@@ -122,5 +122,33 @@ namespace Flights.Controllers
             return CreatedAtAction(nameof(Find), new { id = dto.FlightId });
         }
 
+        [HttpPost("CreateFlight")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(201)]
+
+        public IActionResult CreateFlight(FlightDto flightDto)
+        {
+            var flight = new Flight(
+                Guid.NewGuid(),
+                flightDto.Airline,
+                flightDto.Price,
+                flightDto.Departure,
+                flightDto.Arrival,
+                flightDto.RemainingNumberOfSeats
+                );
+
+            if (flight == null)
+            {
+                return NotFound();
+            }
+
+            _entities.Flights.AddAsync(flight);
+            _entities.SaveChanges();
+
+
+            return CreatedAtAction(nameof(Find), new { id = flight.Id });
+        }
     }
-}
+};
